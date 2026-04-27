@@ -6,7 +6,7 @@ A B2B go-to-market workspace for sales reps. This repo holds the Outbound Engine
 
 ## Prerequisites
 
-- Node 20.11 or newer (`vite.config.ts` uses `import.meta.dirname`)
+- Node 20.19+ or 22.12+ (Vite 8 minimum; `vite.config.ts` also uses `import.meta.dirname` which landed in 20.11)
 - npm 10 or newer
 
 ## Setup
