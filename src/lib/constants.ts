@@ -19,6 +19,19 @@ export const ROUTES = {
   ANALYTICS: '/analytics',
   KNOWLEDGE_BASE: '/knowledge-base',
   MARKETING_EVENTS: '/marketing-events',
+  TEMPLATES: '/templates',
+  WEBINARS: '/webinars',
+  REPORTS: '/reports',
+  PLAYBOOKS: '/playbooks',
+  CASE_STUDIES: '/case-studies',
+  ROADMAP: '/roadmap',
+  CHANGELOG: '/changelog',
+  INTEGRATIONS: '/integrations',
+  COMMUNITY: '/community',
+  SUPPORT: '/support',
+  ACADEMY: '/academy',
+  PARTNERS: '/partners',
+  SECURITY: '/security',
 } as const;
 
 export const STORAGE_KEYS = {

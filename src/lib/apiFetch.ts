@@ -31,7 +31,18 @@ export async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> 
   });
 
   if (response.status === 401) throw new UnauthorizedError();
-  if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+
+  if (!response.ok) {
+    let message = `HTTP ${response.status}: ${response.statusText}`;
+    try {
+      const errBody = (await response.json()) as { message?: string };
+      if (typeof errBody.message === 'string') message = errBody.message;
+    } catch {
+      /* keep default message */
+    }
+    throw new Error(message);
+  }
+
   if (response.status === 204) return undefined as unknown as T;
 
   return response.json() as Promise<T>;

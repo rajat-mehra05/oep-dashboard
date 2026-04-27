@@ -46,7 +46,7 @@ export function Avatar({
       {showOnlineDot ? (
         <>
           <span
-            className="absolute right-0 bottom-0 block h-2.5 w-2.5 rounded-full border-2 border-white bg-emerald-400"
+            className="absolute right-[6%] bottom-[6%] block h-2.5 w-2.5 rounded-full border-2 border-white bg-emerald-400"
             aria-hidden="true"
           />
           <span className="sr-only">Online</span>

@@ -1,0 +1,108 @@
+import { useProspects } from '@/features/prospects/hooks/useProspects';
+import { useProspectStore } from '@/features/prospects/store/useProspectStore';
+import { ProspectRow } from '@/components/dashboard/ProspectRow';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+
+interface Column {
+  label: string;
+  labelClassName?: string;
+}
+
+const COLUMNS: Column[] = [
+  { label: 'Prospect' },
+  { label: 'Stage' },
+  { label: 'Goal' },
+  { label: 'Signal' },
+  { label: 'Recommended Action', labelClassName: 'block max-w-[7rem]' },
+  { label: 'Actions' },
+];
+
+export function HuntQueueTable() {
+  const { data, isLoading, isError, refetch } = useProspects();
+  const { selectedRowIds, toggleRowSelection, selectPage } = useProspectStore();
+
+  const rows = data?.data ?? [];
+  const rowIds = rows.map((r) => r.id);
+  const allSelected = rowIds.length > 0 && rowIds.every((id) => selectedRowIds.includes(id));
+  const someSelected = rowIds.some((id) => selectedRowIds.includes(id)) && !allSelected;
+
+  if (isError) {
+    return (
+      <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+        Failed to load prospects.{' '}
+        <Button variant="ghost" size="sm" onClick={() => void refetch()}>
+          Retry
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="border-primary-light overflow-x-auto rounded-md border" aria-busy={isLoading}>
+      <table className="w-full text-left">
+        <thead>
+          <tr className="bg-gray-50">
+            <th className="w-10 px-4 py-3">
+              <Checkbox
+                checked={allSelected ? true : someSelected ? 'indeterminate' : false}
+                onCheckedChange={() => selectPage(rowIds)}
+                aria-label="Select all"
+              />
+            </th>
+            {COLUMNS.map(({ label, labelClassName }) => (
+              <th key={label} className="text-text-muted px-4 py-4 text-sm font-medium">
+                <span className={cn('whitespace-normal', labelClassName)}>{label}</span>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {isLoading ? (
+            Array.from({ length: 4 }).map((_, i) => (
+              <tr key={i} className="border-b border-gray-100">
+                <td className="px-4 py-4">
+                  <Skeleton variant="circle" width="1rem" height="1rem" />
+                </td>
+                <td className="px-4 py-4">
+                  <div className="flex items-center gap-3">
+                    <Skeleton variant="circle" width="2rem" height="2rem" />
+                    <div className="space-y-1">
+                      <Skeleton variant="text" width="8rem" height="0.75rem" />
+                      <Skeleton variant="text" width="5rem" height="0.625rem" />
+                    </div>
+                  </div>
+                </td>
+                {[3, 4, 5, 6, 7].map((j) => (
+                  <td key={j} className="px-4 py-4">
+                    <Skeleton variant="text" width="5rem" height="0.75rem" />
+                  </td>
+                ))}
+              </tr>
+            ))
+          ) : rows.length === 0 ? (
+            <tr>
+              <td
+                colSpan={COLUMNS.length + 1}
+                className="text-text-muted px-4 py-8 text-center text-sm"
+              >
+                No prospects match your filters.
+              </td>
+            </tr>
+          ) : (
+            rows.map((prospect) => (
+              <ProspectRow
+                key={prospect.id}
+                prospect={prospect}
+                isSelected={selectedRowIds.includes(prospect.id)}
+                onToggle={() => toggleRowSelection(prospect.id)}
+              />
+            ))
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
+}
