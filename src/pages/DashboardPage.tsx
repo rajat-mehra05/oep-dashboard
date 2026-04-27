@@ -15,7 +15,7 @@ export function DashboardPage() {
   return (
     <AppShell>
       <Sidebar />
-      <main className="flex flex-col overflow-y-auto bg-white">
+      <main className="flex flex-col overflow-y-auto bg-white [scrollbar-gutter:stable]">
         <GreetingHeader />
         <div className="flex-1 px-0 pb-8">
           <TabBar huntPanel={<HuntPanel />} />

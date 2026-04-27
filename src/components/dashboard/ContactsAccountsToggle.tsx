@@ -17,7 +17,7 @@ export function ContactsAccountsToggle({ total }: ContactsAccountsToggleProps) {
           type="button"
           onClick={() => setActiveView(view)}
           className={cn(
-            'rounded-full px-4 py-1.5 text-sm capitalize transition-colors',
+            'rounded-lg px-4 py-1.5 text-sm capitalize transition-colors',
             'focus-visible:ring-primary focus-visible:ring-2 focus-visible:outline-none',
             activeView === view
               ? 'border-border text-text-primary border font-semibold'

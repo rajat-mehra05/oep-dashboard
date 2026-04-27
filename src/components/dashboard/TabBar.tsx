@@ -11,17 +11,35 @@ interface TabConfig {
   label: string;
   icon: ReactNode;
   badgeVariant: 'hunt' | 'activate' | 'inbox';
+  selectedTab: string;
+  selectedBadge: string;
 }
 
 const TABS: TabConfig[] = [
-  { value: 'hunt', label: 'Hunt', icon: <Zap className="h-4 w-4" />, badgeVariant: 'hunt' },
+  {
+    value: 'hunt',
+    label: 'Hunt',
+    icon: <Zap className="h-4 w-4" />,
+    badgeVariant: 'hunt',
+    selectedTab: 'rounded-2xl bg-hunt-badge text-text-primary hover:bg-hunt-badge',
+    selectedBadge: 'bg-hunt-badge-strong text-hunt-badge-text',
+  },
   {
     value: 'activate',
     label: 'Activate',
     icon: <Sparkles className="h-4 w-4" />,
     badgeVariant: 'activate',
+    selectedTab: 'rounded-2xl bg-activate-badge text-text-primary hover:bg-activate-badge',
+    selectedBadge: 'bg-activate-badge-strong text-activate-badge-text',
   },
-  { value: 'inbox', label: 'Inbox', icon: <Mail className="h-4 w-4" />, badgeVariant: 'inbox' },
+  {
+    value: 'inbox',
+    label: 'Inbox',
+    icon: <Mail className="h-4 w-4" />,
+    badgeVariant: 'inbox',
+    selectedTab: 'rounded-2xl bg-inbox-badge text-text-primary hover:bg-inbox-badge',
+    selectedBadge: 'bg-inbox-badge-strong text-inbox-badge-text',
+  },
 ];
 
 interface TabBarProps {
@@ -35,17 +53,26 @@ export function TabBar({ huntPanel }: TabBarProps) {
 
   return (
     <TabsRoot value={activeTab} onValueChange={(v) => setActiveTab(v as ProspectTab)}>
-      <TabsList className="px-6">
-        {TABS.map(({ value, label, icon, badgeVariant }) => (
-          <TabsTrigger key={value} value={value}>
-            {icon}
-            {label}
-            {counts !== undefined ? <Badge variant={badgeVariant}>{counts[value]}</Badge> : null}
-          </TabsTrigger>
-        ))}
-      </TabsList>
+      <div className="pl-16">
+        <TabsList>
+          {TABS.map(({ value, label, icon, badgeVariant, selectedTab, selectedBadge }) => {
+            const isActive = activeTab === value;
+            return (
+              <TabsTrigger key={value} value={value} className={isActive ? selectedTab : undefined}>
+                {icon}
+                {label}
+                {counts !== undefined ? (
+                  <Badge variant={badgeVariant} className={isActive ? selectedBadge : undefined}>
+                    {counts[value]}
+                  </Badge>
+                ) : null}
+              </TabsTrigger>
+            );
+          })}
+        </TabsList>
+      </div>
 
-      <TabsPanel value="hunt" className="px-6 pt-4">
+      <TabsPanel value="hunt" className="px-6 pl-16">
         {huntPanel}
       </TabsPanel>
       <TabsPanel value="activate" className="flex flex-col items-center justify-center gap-2 py-16">

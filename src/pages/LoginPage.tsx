@@ -1,15 +1,17 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { useAuthStore } from '@/features/auth/store/useAuthStore';
 import { LoginForm } from '@/components/auth/LoginForm';
 
 export function LoginPage() {
   const token = useAuthStore((s) => s.token);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = (location.state as { from?: { pathname?: string } } | null)?.from?.pathname ?? '/';
 
   useEffect(() => {
-    if (token) navigate('/', { replace: true });
-  }, [token, navigate]);
+    if (token) void navigate(from, { replace: true });
+  }, [token, navigate, from]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">

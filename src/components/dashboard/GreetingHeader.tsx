@@ -17,7 +17,7 @@ export function GreetingHeader() {
 
   if (isLoading || !user || !counts) {
     return (
-      <div className="flex items-start gap-4 px-6 pt-6 pb-4">
+      <div className="flex items-start gap-4 pt-6 pr-6 pb-4 pl-16">
         <Skeleton variant="circle" width="3rem" height="3rem" />
         <div className="flex-1 space-y-2 pt-1">
           <Skeleton variant="text" height="1.25rem" width="40%" />
@@ -30,7 +30,7 @@ export function GreetingHeader() {
   const greeting = GREETING[getTimeOfDayGreeting()];
 
   return (
-    <header className="flex items-start gap-4 px-6 pt-6 pb-4">
+    <header className="flex items-start gap-4 pt-6 pr-6 pb-4 pl-16">
       <Avatar
         initials={user.initials}
         color={user.avatarColor}
@@ -42,7 +42,7 @@ export function GreetingHeader() {
         <h1 className="text-text-primary text-xl font-bold">
           {greeting}, {user.name}!
         </h1>
-        <p className="text-text-muted mt-0.5 text-sm">
+        <p className="text-text-muted mt-0.5 max-w-xl text-sm">
           I have{' '}
           <strong className="text-text-primary font-semibold">{counts.hunt} prospects</strong> to
           hunt,{' '}

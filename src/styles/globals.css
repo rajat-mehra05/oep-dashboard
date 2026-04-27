@@ -10,10 +10,13 @@
   --color-signal-bg: #ede9fe;
   --color-signal-text: #6d28d9;
   --color-hunt-badge: #dbeafe;
+  --color-hunt-badge-strong: #bfdbfe;
   --color-hunt-badge-text: #1d4ed8;
   --color-activate-badge: #ffedd5;
+  --color-activate-badge-strong: #fed7aa;
   --color-activate-badge-text: #c2410c;
   --color-inbox-badge: #d1fae5;
+  --color-inbox-badge-strong: #a7f3d0;
   --color-inbox-badge-text: #065f46;
 
   --font-sans: 'Geist Sans', system-ui, sans-serif;
@@ -52,5 +55,13 @@
     background-color: white;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
   }
 }

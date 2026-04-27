@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { useTeam } from '@/features/prospects/hooks/useTeam';
 import { useProspectStore } from '@/features/prospects/store/useProspectStore';
 import { Avatar } from '@/components/ui/avatar';
@@ -53,9 +54,9 @@ export function SidebarTeam({ isCollapsed }: SidebarTeamProps) {
               type="button"
               onClick={() => setActiveTeamMember(member.id)}
               className={cn(
-                'flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left transition-colors',
+                'flex w-full items-center gap-3 rounded-lg bg-white px-3 py-2 text-left transition-colors',
                 'focus-visible:ring-primary hover:bg-gray-100 focus-visible:ring-2 focus-visible:outline-none',
-                isActive && 'bg-[#F1EEF7]',
+                isActive && 'bg-gray-100 hover:bg-gray-100',
               )}
             >
               <Avatar
@@ -76,7 +77,7 @@ export function SidebarTeam({ isCollapsed }: SidebarTeamProps) {
 
         return isCollapsed ? (
           <Tooltip key={member.id} content={member.name}>
-            {item as React.ReactElement}
+            {item as ReactElement}
           </Tooltip>
         ) : (
           item

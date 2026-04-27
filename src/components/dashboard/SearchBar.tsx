@@ -6,13 +6,16 @@ import { useDebouncedValue } from '@/lib/utils';
 import { SEARCH_DEBOUNCE_MS } from '@/lib/constants';
 
 export function SearchBar() {
+  const searchQuery = useProspectStore((s) => s.searchQuery);
   const setSearchQuery = useProspectStore((s) => s.setSearchQuery);
-  const [localValue, setLocalValue] = useState('');
+  const [localValue, setLocalValue] = useState(searchQuery);
   const debouncedValue = useDebouncedValue(localValue, SEARCH_DEBOUNCE_MS);
 
   useEffect(() => {
-    setSearchQuery(debouncedValue);
-  }, [debouncedValue, setSearchQuery]);
+    if (debouncedValue !== searchQuery) {
+      setSearchQuery(debouncedValue);
+    }
+  }, [debouncedValue, searchQuery, setSearchQuery]);
 
   return (
     <Input

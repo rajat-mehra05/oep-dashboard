@@ -22,7 +22,7 @@ export function Sidebar() {
         'text-text-muted flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors',
         'hover:text-text-primary hover:bg-gray-100',
         'focus-visible:ring-primary focus-visible:ring-2 focus-visible:outline-none',
-        isHome && 'bg-primary-light text-primary font-medium',
+        isHome && 'text-text-primary bg-gray-100 font-medium',
       )}
     >
       <Home className="h-4 w-4 shrink-0" />
@@ -32,7 +32,7 @@ export function Sidebar() {
 
   return (
     <nav
-      className="bg-sidebar-bg flex flex-col transition-[width] duration-200 ease-out"
+      className="bg-sidebar-bg border-border sticky top-0 flex h-screen flex-col border-r"
       aria-label="Main navigation"
     >
       {/* Header: NXL badge + collapse toggle */}
@@ -64,22 +64,25 @@ export function Sidebar() {
         </button>
       </div>
 
-      {/* Home link */}
-      <div className="px-2">
-        {isSidebarCollapsed ? <Tooltip content="Home">{homeLink}</Tooltip> : homeLink}
-      </div>
+      {/* Scrollable area: Home → Team → Resources, all in one scroll */}
+      <div className="min-h-0 flex-1 overflow-y-auto bg-white px-2">
+        {/* Home link with bottom border + spacing */}
+        <div className="border-border border-b pt-2 pb-4">
+          {isSidebarCollapsed ? <Tooltip content="Home">{homeLink}</Tooltip> : homeLink}
+        </div>
 
-      {/* Team section */}
-      <div className="mt-4 flex-1 overflow-y-auto px-2">
-        {!isSidebarCollapsed ? (
-          <p className="text-text-muted mb-2 px-3 text-[10px] font-semibold tracking-widest uppercase">
-            AI RevenueOS GTM Team
-          </p>
-        ) : null}
-        <SidebarTeam isCollapsed={isSidebarCollapsed} />
+        {/* Team section */}
+        <div className="border-border border-b pt-4 pb-4">
+          {!isSidebarCollapsed ? (
+            <p className="text-text-muted mb-2 px-3 text-[10px] font-semibold tracking-widest uppercase">
+              AI RevenueOS GTM Team
+            </p>
+          ) : null}
+          <SidebarTeam isCollapsed={isSidebarCollapsed} />
+        </div>
 
         {/* Resources section */}
-        <div className="mt-6">
+        <div className="mt-6 pb-4">
           {!isSidebarCollapsed ? (
             <p className="text-text-muted mb-2 px-3 text-[10px] font-semibold tracking-widest uppercase">
               Resources

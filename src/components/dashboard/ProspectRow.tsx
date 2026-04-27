@@ -17,6 +17,10 @@ interface ProspectRowProps {
 export function ProspectRow({ prospect: p, isSelected, onToggle }: ProspectRowProps) {
   const [dialog, setDialog] = useState<'review' | 'menu' | null>(null);
 
+  function handleDialogOpenChange(open: boolean) {
+    if (!open) setDialog(null);
+  }
+
   return (
     <>
       <tr className="border-b border-gray-100 hover:bg-gray-50">
@@ -29,7 +33,7 @@ export function ProspectRow({ prospect: p, isSelected, onToggle }: ProspectRowPr
         </td>
 
         <td className="px-4 py-4">
-          <div className="flex items-start gap-3">
+          <div className="flex items-center gap-3">
             <Avatar initials={p.avatarInitials} color={p.avatarColor} size={32} name={p.name} />
             <div className="min-w-0">
               <p className="text-text-primary font-semibold">{p.name}</p>
@@ -80,12 +84,12 @@ export function ProspectRow({ prospect: p, isSelected, onToggle }: ProspectRowPr
 
       <AlertDialog
         open={dialog === 'review'}
-        onOpenChange={() => setDialog(null)}
+        onOpenChange={handleDialogOpenChange}
         title={`You clicked Review for ${p.name}.`}
       />
       <AlertDialog
         open={dialog === 'menu'}
-        onOpenChange={() => setDialog(null)}
+        onOpenChange={handleDialogOpenChange}
         title={`You opened the row menu for ${p.name}.`}
       />
     </>

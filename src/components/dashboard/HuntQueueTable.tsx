@@ -28,7 +28,7 @@ export function HuntQueueTable() {
   }
 
   return (
-    <div className="overflow-x-auto" aria-busy={isLoading}>
+    <div className="border-primary-light overflow-x-auto rounded-md border" aria-busy={isLoading}>
       <table className="w-full text-left">
         <thead>
           <tr className="bg-gray-50">
@@ -50,36 +50,47 @@ export function HuntQueueTable() {
           </tr>
         </thead>
         <tbody>
-          {isLoading
-            ? Array.from({ length: 4 }).map((_, i) => (
-                <tr key={i} className="border-b border-gray-100">
-                  <td className="px-4 py-4">
-                    <Skeleton variant="circle" width="1rem" height="1rem" />
-                  </td>
-                  <td className="px-4 py-4">
-                    <div className="flex items-center gap-3">
-                      <Skeleton variant="circle" width="2rem" height="2rem" />
-                      <div className="space-y-1">
-                        <Skeleton variant="text" width="8rem" height="0.75rem" />
-                        <Skeleton variant="text" width="5rem" height="0.625rem" />
-                      </div>
+          {isLoading ? (
+            Array.from({ length: 4 }).map((_, i) => (
+              <tr key={i} className="border-b border-gray-100">
+                <td className="px-4 py-4">
+                  <Skeleton variant="circle" width="1rem" height="1rem" />
+                </td>
+                <td className="px-4 py-4">
+                  <div className="flex items-center gap-3">
+                    <Skeleton variant="circle" width="2rem" height="2rem" />
+                    <div className="space-y-1">
+                      <Skeleton variant="text" width="8rem" height="0.75rem" />
+                      <Skeleton variant="text" width="5rem" height="0.625rem" />
                     </div>
+                  </div>
+                </td>
+                {[3, 4, 5, 6, 7].map((j) => (
+                  <td key={j} className="px-4 py-4">
+                    <Skeleton variant="text" width="5rem" height="0.75rem" />
                   </td>
-                  {[3, 4, 5, 6, 7].map((j) => (
-                    <td key={j} className="px-4 py-4">
-                      <Skeleton variant="text" width="5rem" height="0.75rem" />
-                    </td>
-                  ))}
-                </tr>
-              ))
-            : rows.map((prospect) => (
-                <ProspectRow
-                  key={prospect.id}
-                  prospect={prospect}
-                  isSelected={selectedRowIds.includes(prospect.id)}
-                  onToggle={() => toggleRowSelection(prospect.id)}
-                />
-              ))}
+                ))}
+              </tr>
+            ))
+          ) : rows.length === 0 ? (
+            <tr>
+              <td
+                colSpan={COLUMNS.length + 1}
+                className="text-text-muted px-4 py-8 text-center text-sm"
+              >
+                No prospects match your filters.
+              </td>
+            </tr>
+          ) : (
+            rows.map((prospect) => (
+              <ProspectRow
+                key={prospect.id}
+                prospect={prospect}
+                isSelected={selectedRowIds.includes(prospect.id)}
+                onToggle={() => toggleRowSelection(prospect.id)}
+              />
+            ))
+          )}
         </tbody>
       </table>
     </div>

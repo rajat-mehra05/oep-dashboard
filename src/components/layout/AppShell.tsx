@@ -11,10 +11,13 @@ export function AppShell({ children }: AppShellProps) {
   const isSidebarCollapsed = useUIStore((s) => s.isSidebarCollapsed);
   const isLaptop = useMediaQuery(`(max-width: ${BREAKPOINTS.LAPTOP - 1}px)`);
 
-  const sidebarW = isSidebarCollapsed ? '4rem' : isLaptop ? '14rem' : '18rem';
+  const sidebarW = isSidebarCollapsed ? '5rem' : isLaptop ? '14rem' : '18rem';
 
   return (
-    <div className="grid min-h-screen" style={{ gridTemplateColumns: `${sidebarW} 1fr` }}>
+    <div
+      className="grid min-h-screen transition-[grid-template-columns] duration-200 ease-out"
+      style={{ gridTemplateColumns: `${sidebarW} 1fr` }}
+    >
       {children}
     </div>
   );

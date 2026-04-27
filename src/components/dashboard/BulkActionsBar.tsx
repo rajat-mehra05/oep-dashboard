@@ -42,7 +42,9 @@ export function BulkActionsBar() {
 
       <AlertDialog
         open={pendingAction !== null}
-        onOpenChange={() => setPendingAction(null)}
+        onOpenChange={(open) => {
+          if (!open) setPendingAction(null);
+        }}
         title={`${pendingAction ?? ''} triggered for ${count} prospect${count !== 1 ? 's' : ''}. (Stub.)`}
       />
     </>

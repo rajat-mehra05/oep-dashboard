@@ -16,17 +16,16 @@ export function HuntPanel() {
       <ContactsAccountsToggle total={total} />
       <SearchBar />
 
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-text-primary inline text-base font-semibold">Hunt Queue</h2>
-          <span className="text-text-muted ml-2 rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium">
-            {total} pending
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <FiltersPopover />
-          <UploadButton />
-        </div>
+      <div className="flex items-center justify-end gap-2">
+        <FiltersPopover />
+        <UploadButton />
+      </div>
+
+      <div className="mt-[1.2rem]">
+        <h2 className="text-text-primary inline text-base font-semibold">Hunt Queue</h2>
+        <span className="text-text-muted ml-2 rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium">
+          {total} pending
+        </span>
       </div>
 
       <BulkActionsBar />

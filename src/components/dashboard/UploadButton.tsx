@@ -37,7 +37,9 @@ export function UploadButton() {
       </Button>
       <AlertDialog
         open={dialogMsg !== null}
-        onOpenChange={() => setDialogMsg(null)}
+        onOpenChange={(open) => {
+          if (!open) setDialogMsg(null);
+        }}
         title="File selected"
         description={dialogMsg ?? ''}
       />

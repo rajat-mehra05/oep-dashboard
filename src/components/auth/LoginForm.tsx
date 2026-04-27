@@ -5,8 +5,8 @@ import { useLogin } from '@/features/auth/hooks/useLogin';
 import { useGuestLogin } from '@/features/auth/hooks/useGuestLogin';
 
 export function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('lewis@xyz.com');
+  const [password, setPassword] = useState('password123');
   const login = useLogin();
   const guestLogin = useGuestLogin();
 
@@ -19,8 +19,10 @@ export function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {login.error !== null && login.error !== undefined ? (
-        <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-600">{login.error.message}</p>
+      {login.error || guestLogin.error ? (
+        <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-600">
+          {(login.error ?? guestLogin.error)?.message}
+        </p>
       ) : null}
 
       <Input
@@ -54,12 +56,6 @@ export function LoginForm() {
       >
         {guestLogin.isPending ? 'Continuing…' : 'Continue as guest'}
       </button>
-
-      <div className="border-border text-text-muted space-y-0.5 border-t pt-3 text-xs">
-        <p>lewis@xyz.com / password123</p>
-        <p>rajat@xyz.com / password123</p>
-        <p>Or use Continue as guest</p>
-      </div>
     </form>
   );
 }
