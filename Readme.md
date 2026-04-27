@@ -2,7 +2,7 @@
 
 A B2B go-to-market workspace for sales reps. This repo holds the Outbound Engine Prospect Dashboard screen.
 
-**Status:** Phase 1 complete. Boilerplate, tooling, and CI are in place. No product UI yet.
+**Status:** Phase 3 complete. All three Zustand stores are wired up (auth with localStorage token persistence, UI for sidebar collapsed state, prospect table state with encoded reset rules). Run `npm run dev` to see the primitive sandbox at `localhost:5173`.
 
 ## Prerequisites
 
@@ -37,9 +37,25 @@ Filled in once Phase 4 wires up auth.
 
 ## Tech Stack
 
-React 19, Vite 8, TypeScript 6 strict, Tailwind CSS v4, ESLint 10, Prettier 3, Base UI primitives, Zustand, TanStack Query, MSW v2.
+React 19, Vite 8, TypeScript 6 strict, Tailwind CSS v4, ESLint 10, Prettier 3, Base UI v1.4 (`@base-ui/react`), TanStack Query v5, MSW v2, lucide-react, tailwind-merge, clsx.
 
 All deps pinned to current major (verified via `npm install @latest` and `npm outdated`). No version pulled from memory.
+
+## What exists
+
+| Path                            | Purpose                                                                                              |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `src/lib/constants.ts`          | Domain constants (stages, signals, goals, routes, storage keys, page size)                           |
+| `src/lib/utils.ts`              | `cn`, `formatRelativeTime`, `getTimeOfDayGreeting`, `useDebouncedValue`, `useMediaQuery`             |
+| `src/lib/apiFetch.ts`           | Typed fetch wrapper with auth header injection                                                       |
+| `src/lib/queryClient.ts`        | TanStack Query client (staleTime 60s, retry 1)                                                       |
+| `src/features/auth/types/`      | `User`, `LoginRequest`, `LoginResponse`                                                              |
+| `src/features/prospects/types/` | `TeamMember`, `Prospect`, `ProspectPage`, `Counts`                                                   |
+| `src/mocks/`                    | MSW handlers for auth, me, team, prospects, counts + 12-prospect seed                                |
+| `src/components/ui/`            | 10 primitives: Button, Input, Checkbox, Tabs, Popover, Tooltip, AlertDialog, Avatar, Badge, Skeleton |
+| `src/features/auth/store/`      | `useAuthStore` — token + user state, manual localStorage sync so `apiFetch` reads a raw token string |
+| `src/features/ui/store/`        | `useUIStore` — sidebar collapsed state, persisted via Zustand persist middleware                     |
+| `src/features/prospects/store/` | `useProspectStore` — tab/view/search/filter/page/selection state with encoded reset rules            |
 
 ## Tooling and Quality Gates
 
