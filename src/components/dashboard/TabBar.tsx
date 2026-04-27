@@ -21,7 +21,7 @@ const TABS: TabConfig[] = [
     label: 'Hunt',
     icon: <Zap className="h-4 w-4" />,
     badgeVariant: 'hunt',
-    selectedTab: 'rounded-2xl bg-hunt-badge text-text-primary hover:bg-hunt-badge',
+    selectedTab: 'rounded-2xl bg-hunt-badge text-hunt-badge-text hover:bg-hunt-badge',
     selectedBadge: 'bg-hunt-badge-strong text-hunt-badge-text',
   },
   {
@@ -29,7 +29,7 @@ const TABS: TabConfig[] = [
     label: 'Activate',
     icon: <Sparkles className="h-4 w-4" />,
     badgeVariant: 'activate',
-    selectedTab: 'rounded-2xl bg-activate-badge text-text-primary hover:bg-activate-badge',
+    selectedTab: 'rounded-2xl bg-activate-badge text-activate-badge-text hover:bg-activate-badge',
     selectedBadge: 'bg-activate-badge-strong text-activate-badge-text',
   },
   {
@@ -37,7 +37,7 @@ const TABS: TabConfig[] = [
     label: 'Inbox',
     icon: <Mail className="h-4 w-4" />,
     badgeVariant: 'inbox',
-    selectedTab: 'rounded-2xl bg-inbox-badge text-text-primary hover:bg-inbox-badge',
+    selectedTab: 'rounded-2xl bg-inbox-badge text-inbox-badge-text hover:bg-inbox-badge',
     selectedBadge: 'bg-inbox-badge-strong text-inbox-badge-text',
   },
 ];
