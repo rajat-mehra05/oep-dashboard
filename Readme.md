@@ -6,6 +6,10 @@ A B2B go-to-market workspace for sales reps. This repo holds the Outbound Engine
 
 ![Dashboard](public/dashboard.png)
 
+## Lighthouse Scores
+
+![Lighthouse Scores](public/lighthouse-scores.png)
+
 ## Product Context
 
 Outbound sales reps spend most of their day juggling lists. Which prospect is hot. Which account just hired a VP. Which contact opened the pricing page yesterday. The information is scattered across CRM tabs, LinkedIn, signal tools, and Slack threads.
