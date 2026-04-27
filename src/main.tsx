@@ -9,10 +9,9 @@ import { App } from '@/App';
 import { hydrateAuth } from '@/features/auth/store/useAuthStore';
 
 async function bootstrap(): Promise<void> {
-  if (import.meta.env.DEV || import.meta.env.VITE_ENABLE_MOCKS === 'true') {
-    const { startMockWorker } = await import('@/mocks/browser');
-    await startMockWorker();
-  }
+  // No real backend: MSW handles every /api/* call in dev and prod alike.
+  const { startMockWorker } = await import('@/mocks/browser');
+  await startMockWorker();
 
   // Rehydrate auth before first render so user is never null when a valid token exists
   await hydrateAuth();
