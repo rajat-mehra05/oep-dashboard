@@ -28,8 +28,10 @@ export const prospectsHandlers = [
     const url = new URL(request.url);
     const tab = url.searchParams.get('tab') ?? 'hunt';
     const search = url.searchParams.get('search') ?? '';
-    const page = parseInt(url.searchParams.get('page') ?? '1', 10);
-    const limit = parseInt(url.searchParams.get('limit') ?? String(PAGE_SIZE), 10);
+    const rawPage = parseInt(url.searchParams.get('page') ?? '1', 10);
+    const rawLimit = parseInt(url.searchParams.get('limit') ?? String(PAGE_SIZE), 10);
+    const page = Number.isFinite(rawPage) && rawPage >= 1 ? rawPage : 1;
+    const limit = Number.isFinite(rawLimit) && rawLimit >= 1 ? rawLimit : PAGE_SIZE;
     const stagesParam = url.searchParams.get('stages') ?? '';
     const signalsParam = url.searchParams.get('signals') ?? '';
 

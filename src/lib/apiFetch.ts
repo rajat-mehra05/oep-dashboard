@@ -17,11 +17,14 @@ function getStoredToken(): string | null {
 
 export async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
   const token = getStoredToken();
+  const hasBody = init?.body !== undefined;
+  const isFormLike = hasBody && (init?.body instanceof FormData || init?.body instanceof Blob);
 
   const response = await fetch(path, {
     ...init,
     headers: {
-      'Content-Type': 'application/json',
+      // Only set Content-Type for JSON bodies; let the browser set it for FormData/Blob
+      ...(hasBody && !isFormLike ? { 'Content-Type': 'application/json' } : {}),
       ...(token !== null ? { Authorization: `Bearer ${token}` } : {}),
       ...init?.headers,
     },
@@ -29,6 +32,7 @@ export async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> 
 
   if (response.status === 401) throw new UnauthorizedError();
   if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+  if (response.status === 204) return undefined as unknown as T;
 
   return response.json() as Promise<T>;
 }

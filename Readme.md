@@ -16,7 +16,7 @@ npm install
 npm run dev
 ```
 
-The dev server runs at http://localhost:5173 and shows a "boilerplate ready" screen until Phase 5 wires up the dashboard shell.
+The dev server runs at http://localhost:5173 and renders the primitive sandbox introduced in Phase 2.
 
 ## Scripts
 

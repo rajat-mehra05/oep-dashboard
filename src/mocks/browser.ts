@@ -14,5 +14,5 @@ const worker = setupWorker(
 );
 
 export async function startMockWorker(): Promise<void> {
-  await worker.start({ onUnhandledRequest: 'bypass' });
+  await worker.start({ onUnhandledRequest: 'warn' });
 }

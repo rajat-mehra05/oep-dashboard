@@ -25,6 +25,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant = 'primary', size = 'md', className, children, ...props }, ref) => (
     <button
       ref={ref}
+      type="button"
       className={cn(
         'inline-flex cursor-pointer items-center justify-center gap-2 rounded-md font-medium',
         'transition-colors focus-visible:ring-2 focus-visible:outline-none',

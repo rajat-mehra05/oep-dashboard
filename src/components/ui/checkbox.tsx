@@ -5,7 +5,6 @@ import { cn } from '@/lib/utils';
 export interface CheckboxProps {
   checked?: boolean | 'indeterminate';
   onCheckedChange?: (checked: boolean) => void;
-  indeterminate?: boolean;
   'aria-label'?: string;
   className?: string;
 }
@@ -13,11 +12,10 @@ export interface CheckboxProps {
 export function Checkbox({
   checked,
   onCheckedChange,
-  indeterminate = false,
   'aria-label': ariaLabel,
   className,
 }: CheckboxProps) {
-  const isIndeterminate = indeterminate || checked === 'indeterminate';
+  const isIndeterminate = checked === 'indeterminate';
   const isChecked = checked === true;
 
   return (

@@ -18,7 +18,7 @@ export function PrimitiveSandbox() {
 
   return (
     <div className="mx-auto max-w-2xl space-y-8 p-8">
-      <h1 className="text-text-primary text-2xl font-semibold">Phase 2: Primitive Sandbox</h1>
+      <h1 className="text-text-primary text-2xl font-semibold">Phase 3: Primitive Sandbox</h1>
 
       <section className="space-y-2">
         <h2 className="text-text-muted text-sm font-medium tracking-wide uppercase">Buttons</h2>

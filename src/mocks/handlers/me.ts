@@ -18,6 +18,10 @@ export const meHandlers = [
     }
 
     const user = SEEDED_USERS.find((u) => u.id === userId);
-    return HttpResponse.json(user ?? null);
+    if (user === undefined) {
+      return HttpResponse.json({ message: 'Unauthorized' }, { status: 401 });
+    }
+
+    return HttpResponse.json(user);
   }),
 ];

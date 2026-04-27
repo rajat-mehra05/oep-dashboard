@@ -1,5 +1,7 @@
 import type { Goal, Signal, Stage } from '@/lib/constants';
 
+export type ProspectTab = 'hunt' | 'activate' | 'inbox';
+
 export interface TeamMember {
   id: string;
   name: string;
@@ -26,7 +28,7 @@ export interface Prospect {
   goal: Goal;
   signal: ProspectSignal;
   recommendedAction: string;
-  tab: 'hunt' | 'activate' | 'inbox';
+  tab: ProspectTab;
 }
 
 export interface ProspectPage {

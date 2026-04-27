@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
 
 export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
@@ -35,16 +35,14 @@ export function useDebouncedValue<T>(value: T, delayMs: number): T {
 }
 
 export function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState<boolean>(
+  return useSyncExternalStore(
+    (callback) => {
+      if (typeof window === 'undefined') return () => {};
+      const media = window.matchMedia(query);
+      media.addEventListener('change', callback);
+      return () => media.removeEventListener('change', callback);
+    },
     () => typeof window !== 'undefined' && window.matchMedia(query).matches,
+    () => false,
   );
-
-  useEffect(() => {
-    const media = window.matchMedia(query);
-    const listener = (e: MediaQueryListEvent) => setMatches(e.matches);
-    media.addEventListener('change', listener);
-    return () => media.removeEventListener('change', listener);
-  }, [query]);
-
-  return matches;
 }

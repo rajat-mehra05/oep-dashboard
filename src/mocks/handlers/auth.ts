@@ -2,26 +2,30 @@ import { http, HttpResponse } from 'msw';
 import { SEEDED_USERS } from '@/mocks/seed';
 import type { LoginRequest } from '@/features/auth/types';
 
-const CREDENTIALS: Record<string, string> = {
-  'lewis@xyz.com': 'password123',
-  'rajat@xyz.com': 'password123',
-};
+interface Account {
+  password: string;
+  userId: string;
+}
 
-const USER_BY_EMAIL: Record<string, string> = {
-  'lewis@xyz.com': 'user-lewis',
-  'rajat@xyz.com': 'user-rajat',
+const ACCOUNTS: Record<string, Account> = {
+  'lewis@xyz.com': { password: 'password123', userId: 'user-lewis' },
+  'rajat@xyz.com': { password: 'password123', userId: 'user-rajat' },
 };
 
 export const authHandlers = [
   http.post('/api/auth/login', async ({ request }) => {
     const body = (await request.json()) as LoginRequest;
 
-    if (CREDENTIALS[body.email] !== body.password) {
+    if (!body?.email || !body?.password) {
+      return HttpResponse.json({ message: 'Missing email or password' }, { status: 400 });
+    }
+
+    const account = ACCOUNTS[body.email];
+    if (account === undefined || account.password !== body.password) {
       return HttpResponse.json({ message: 'Invalid credentials' }, { status: 401 });
     }
 
-    const userId = USER_BY_EMAIL[body.email];
-    const user = SEEDED_USERS.find((u) => u.id === userId);
+    const user = SEEDED_USERS.find((u) => u.id === account.userId);
     if (user === undefined) {
       return HttpResponse.json({ message: 'User not found' }, { status: 404 });
     }

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import type { Stage, Signal } from '@/lib/constants';
+import type { ProspectTab } from '@/features/prospects/types';
 
 export interface ProspectFilters {
   stages: Stage[];
@@ -9,7 +10,7 @@ export interface ProspectFilters {
 const EMPTY_FILTERS: ProspectFilters = { stages: [], signals: [] };
 
 interface ProspectStore {
-  activeTab: 'hunt' | 'activate' | 'inbox';
+  activeTab: ProspectTab;
   activeView: 'contacts' | 'accounts';
   searchQuery: string;
   filters: ProspectFilters;
@@ -18,7 +19,7 @@ interface ProspectStore {
   isFilterPanelOpen: boolean;
   activeTeamMemberId: string;
 
-  setActiveTab: (tab: ProspectStore['activeTab']) => void;
+  setActiveTab: (tab: ProspectTab) => void;
   setActiveView: (view: ProspectStore['activeView']) => void;
   setSearchQuery: (query: string) => void;
   setFilters: (filters: ProspectFilters) => void;
