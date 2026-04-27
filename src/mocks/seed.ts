@@ -8,7 +8,7 @@ export const SEEDED_USERS: User[] = [
     id: 'user-lewis',
     name: 'Lewis',
     initials: 'LE',
-    avatarColor: '#10B981',
+    avatarColor: '#34D309',
     role: 'Account Executive',
   },
   {

@@ -1,4 +1,3 @@
-import type { ReactElement } from 'react';
 import { useTeam } from '@/features/prospects/hooks/useTeam';
 import { useProspectStore } from '@/features/prospects/store/useProspectStore';
 import { Avatar } from '@/components/ui/avatar';
@@ -48,39 +47,35 @@ export function SidebarTeam({ isCollapsed }: SidebarTeamProps) {
     <ul className="space-y-0.5">
       {team?.map((member) => {
         const isActive = member.id === activeTeamMemberId;
-        const item = (
-          <li key={member.id}>
-            <button
-              type="button"
-              onClick={() => setActiveTeamMember(member.id)}
-              className={cn(
-                'flex w-full items-center gap-3 rounded-lg bg-white px-3 py-2 text-left transition-colors',
-                'focus-visible:ring-primary hover:bg-gray-100 focus-visible:ring-2 focus-visible:outline-none',
-                isActive && 'bg-gray-100 hover:bg-gray-100',
-              )}
-            >
-              <Avatar
-                initials={member.initials}
-                color={member.avatarColor}
-                size={32}
-                name={member.name}
-              />
-              {!isCollapsed ? (
-                <div className="min-w-0 flex-1">
-                  <p className="text-text-primary truncate text-sm font-medium">{member.name}</p>
-                  <p className="text-text-muted truncate text-xs">{member.role}</p>
-                </div>
-              ) : null}
-            </button>
-          </li>
+        const button = (
+          <button
+            type="button"
+            onClick={() => setActiveTeamMember(member.id)}
+            className={cn(
+              'flex w-full items-center gap-3 rounded-lg bg-white px-3 py-2 text-left transition-colors',
+              'focus-visible:ring-primary hover:bg-gray-100 focus-visible:ring-2 focus-visible:outline-none',
+              isActive && 'bg-gray-100 hover:bg-gray-100',
+            )}
+          >
+            <Avatar
+              initials={member.initials}
+              color={member.avatarColor}
+              size={32}
+              name={member.name}
+            />
+            {!isCollapsed ? (
+              <div className="min-w-0 flex-1">
+                <p className="text-text-primary truncate text-sm font-medium">{member.name}</p>
+                <p className="text-text-muted truncate text-xs">{member.role}</p>
+              </div>
+            ) : null}
+          </button>
         );
 
-        return isCollapsed ? (
-          <Tooltip key={member.id} content={member.name}>
-            {item as ReactElement}
-          </Tooltip>
-        ) : (
-          item
+        return (
+          <li key={member.id}>
+            {isCollapsed ? <Tooltip content={member.name}>{button}</Tooltip> : button}
+          </li>
         );
       })}
     </ul>

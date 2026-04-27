@@ -46,13 +46,22 @@ interface TabBarProps {
   huntPanel: ReactNode;
 }
 
+function isProspectTab(value: unknown): value is ProspectTab {
+  return value === 'hunt' || value === 'activate' || value === 'inbox';
+}
+
 export function TabBar({ huntPanel }: TabBarProps) {
   const { data: counts } = useCounts();
   const activeTab = useProspectStore((s) => s.activeTab);
   const setActiveTab = useProspectStore((s) => s.setActiveTab);
 
   return (
-    <TabsRoot value={activeTab} onValueChange={(v) => setActiveTab(v as ProspectTab)}>
+    <TabsRoot
+      value={activeTab}
+      onValueChange={(v) => {
+        if (isProspectTab(v)) setActiveTab(v);
+      }}
+    >
       <div className="pl-16">
         <TabsList>
           {TABS.map(({ value, label, icon, badgeVariant, selectedTab, selectedBadge }) => {

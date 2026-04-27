@@ -55,7 +55,7 @@ The items below are deferred limitations, not current vulnerabilities. They beco
 
 - **Where:** [src/components/auth/LoginForm.tsx](src/components/auth/LoginForm.tsx) renders `login.error.message` and `guestLogin.error.message` verbatim.
 - **Today:** safe because React escapes the string and the MSW handler returns short, curated copy.
-- **Production fix:** the real backend must return user-facing messages, not raw exception text. The frontend does not need to change, but the assumption needs to be enforced server-side.
+- **Production fix:** the real backend must return user-facing messages, not raw exception text. The frontend should also map unknown or untrusted error strings to a generic fallback (e.g., "Something went wrong. Please try again.") and log the original to telemetry, so a backend regression cannot leak internals into the UI.
 
 ## Review cadence
 
