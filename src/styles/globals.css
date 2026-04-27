@@ -1,0 +1,33 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-sidebar-bg: #f8f8fa;
+  --color-primary: #5b4cf5;
+  --color-primary-light: #eef2ff;
+  --color-text-primary: #111827;
+  --color-text-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-signal-bg: #ede9fe;
+  --color-signal-text: #6d28d9;
+  --color-hunt-badge: #dbeafe;
+  --color-hunt-badge-text: #1d4ed8;
+  --color-activate-badge: #ffedd5;
+  --color-activate-badge-text: #c2410c;
+  --color-inbox-badge: #d1fae5;
+  --color-inbox-badge-text: #065f46;
+
+  --font-sans: 'Geist Sans', system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+
+  body {
+    color: var(--color-text-primary);
+    background-color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
