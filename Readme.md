@@ -2,7 +2,9 @@
 
 A B2B go-to-market workspace for sales reps. This repo holds the Outbound Engine Prospect Dashboard screen.
 
-**Status:** All seven phases complete. Run `npm run dev`, log in at `localhost:5173/login`, and the dashboard is live.
+## Demo
+
+![Dashboard](public/dashboard.png)
 
 ## Product Context
 

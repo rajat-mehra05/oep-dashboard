@@ -63,7 +63,9 @@ export function ProspectRow({ prospect: p, isSelected, onToggle }: ProspectRowPr
           </p>
         </td>
 
-        <td className="text-text-primary px-4 py-4 text-sm">{p.recommendedAction}</td>
+        <td className="text-text-primary px-4 py-4 text-sm">
+          <span className="block max-w-[7rem]">{p.recommendedAction}</span>
+        </td>
 
         <td className="px-4 py-4">
           <div className="flex items-center gap-1">

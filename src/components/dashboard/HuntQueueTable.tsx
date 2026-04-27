@@ -4,8 +4,21 @@ import { ProspectRow } from '@/components/dashboard/ProspectRow';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
-const COLUMNS = ['Prospect', 'Stage', 'Goal', 'Signal', 'Recommended Action', 'Actions'] as const;
+interface Column {
+  label: string;
+  labelClassName?: string;
+}
+
+const COLUMNS: Column[] = [
+  { label: 'Prospect' },
+  { label: 'Stage' },
+  { label: 'Goal' },
+  { label: 'Signal' },
+  { label: 'Recommended Action', labelClassName: 'block max-w-[7rem]' },
+  { label: 'Actions' },
+];
 
 export function HuntQueueTable() {
   const { data, isLoading, isError, refetch } = useProspects();
@@ -39,12 +52,9 @@ export function HuntQueueTable() {
                 aria-label="Select all"
               />
             </th>
-            {COLUMNS.map((col) => (
-              <th
-                key={col}
-                className="text-text-muted px-4 py-3 text-xs font-semibold tracking-wider uppercase"
-              >
-                {col}
+            {COLUMNS.map(({ label, labelClassName }) => (
+              <th key={label} className="text-text-muted px-4 py-4 text-sm font-medium">
+                <span className={cn('whitespace-normal', labelClassName)}>{label}</span>
               </th>
             ))}
           </tr>
