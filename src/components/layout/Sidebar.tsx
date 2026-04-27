@@ -22,7 +22,7 @@ export function Sidebar() {
         'text-text-muted flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors',
         'hover:text-text-primary hover:bg-gray-100',
         'focus-visible:ring-primary focus-visible:ring-2 focus-visible:outline-none',
-        isHome && 'text-text-primary bg-gray-100 font-medium',
+        isHome && 'text-text-primary bg-white font-medium',
       )}
     >
       <Home className="h-4 w-4 shrink-0" />
